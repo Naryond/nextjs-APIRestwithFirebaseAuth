@@ -24,10 +24,10 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="box">
+    <div className="mb-3 p-5">
       <form onSubmit={handleSubmit}>
-        <input type="text" onChange={getUser}></input>
-        <button type="submit">Insert</button>
+        <input type="text" onChange={getUser} placeholder="Insert User"></input>
+        <button type="submit">Search</button>
       </form>
       <br />
       <div>{user.name}</div>
