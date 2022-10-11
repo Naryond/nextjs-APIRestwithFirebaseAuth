@@ -6,7 +6,7 @@ interface data {
 
 export default function Dashboard() {
   const [input, setInput] = useState('');
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<any>({});
   const [picture, setPicture] = useState('');
 
   const getUser = (e: any) => {
@@ -34,7 +34,9 @@ export default function Dashboard() {
       <div>{user.location}</div>
       <div>{user.company}</div>
       <div>{user.blog}</div>
-      <img src={picture} alt="" />
+      <picture>
+        <img src={picture} alt="" />
+      </picture>
     </div>
   );
 }
