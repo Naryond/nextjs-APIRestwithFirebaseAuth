@@ -30,10 +30,10 @@ export default function Dashboard() {
         <button type="submit">Search</button>
       </form>
       <br />
-      <div>{user.name}</div>
-      <div>{user.location}</div>
-      <div>{user.company}</div>
-      <div>{user.blog}</div>
+      <div>Name: {user.name}</div>
+      <div>Location: {user.location}</div>
+      <div>Company: {user.company}</div>
+      <div>Web Page: {user.blog}</div>
       <picture>
         <img src={picture} alt="" />
       </picture>
