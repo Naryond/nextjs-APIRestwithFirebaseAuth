@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 interface data {
   preventDefault: any;
+  target: any;
 }
 
 export default function Dashboard() {
@@ -19,6 +20,7 @@ export default function Dashboard() {
       response.json().then((data) => {
         setUser(data);
         setPicture(`${data.avatar_url}`);
+        e.target.reset();
       })
     );
   };
