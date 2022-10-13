@@ -30,13 +30,17 @@ export default function Dashboard() {
         <button type="submit">Search</button>
       </form>
       <br />
-      <div>Name: {user.name}</div>
-      <div>Location: {user.location}</div>
-      <div>Company: {user.company}</div>
-      <div>Web Page: {user.blog}</div>
-      <picture>
-        <img src={picture} alt="" />
-      </picture>
+      {user.login && (
+        <div>
+          <div>Name: {user.name}</div>
+          <div>Location: {user.location}</div>
+          <div>Company: {user.company}</div>
+          <div>Web Page: {user.blog}</div>
+          <picture>
+            <img src={picture} alt="" />
+          </picture>
+        </div>
+      )}
     </div>
   );
 }
