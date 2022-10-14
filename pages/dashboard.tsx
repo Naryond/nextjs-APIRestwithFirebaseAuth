@@ -1,30 +1,11 @@
 import React, { useState } from 'react';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import User from './user';
 
 interface Data {
   preventDefault: any;
   target: any;
+  user: any;
 }
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
 
 const labels = ['2017', '2018', '2019', '2020', '2021', '2022'];
 
@@ -58,12 +39,11 @@ const Dashboard = () => {
   const [input, setInput] = useState('');
   const [user, setUser] = useState<any>({});
 
-  // handleXXXXX is a more accepted pattern
-  const getUser = (e: any) => {
+  const handleInput = (e: any) => {
     setInput(e.target.value);
   };
 
-  const handleSubmit = (e: Data) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     fetch(`https://api.github.com/users/${input}`)
       .then((response) => response.json())
@@ -79,25 +59,12 @@ const Dashboard = () => {
     <>
       <div className="mb-3 p-5">
         <form onSubmit={handleSubmit}>
-          <input type="text" onChange={getUser} placeholder="Insert User" />
+          <input type="text" onChange={handleInput} placeholder="Search User" />
           <button type="submit">Search</button>
         </form>
         <br />
         {user.login && (
-          <>
-            <div>
-              <div>Name: {user.name}</div>
-              <div>Location: {user.location}</div>
-              {user.company ? <div>Company: {user.company}</div> : null}
-              {user.blog && <div>Web Page: {user.blog}</div>}
-              <picture>
-                <img src={user.avatar_url} alt="" />
-              </picture>
-            </div>
-            <div style={{ width: 600, height: 300 }}>
-              <Line options={options} data={info} />
-            </div>
-          </>
+          <User user={user} labels={labels} options={options} info={info} />
         )}
       </div>
     </>
