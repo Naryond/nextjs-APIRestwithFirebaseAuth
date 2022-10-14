@@ -18,14 +18,19 @@ const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             {user ? (
-              <Nav.Link
-                onClick={() => {
-                  logout();
-                  router.push('/login');
-                }}
-              >
-                Logout
-              </Nav.Link>
+              <>
+                <Link href="/dashboard" passHref>
+                  <Nav.Link>Dashboard</Nav.Link>
+                </Link>
+                <Nav.Link
+                  onClick={() => {
+                    logout();
+                    router.push('/login');
+                  }}
+                >
+                  Logout
+                </Nav.Link>
+              </>
             ) : (
               <>
                 <Link href="/signup" passHref>

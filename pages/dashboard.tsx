@@ -11,7 +11,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
-interface data {
+interface Data {
   preventDefault: any;
   target: any;
 }
@@ -57,49 +57,48 @@ const info = {
 const Dashboard = () => {
   const [input, setInput] = useState('');
   const [user, setUser] = useState<any>({});
-  const [picture, setPicture] = useState('');
 
+  // handleXXXXX is a more accepted pattern
   const getUser = (e: any) => {
     setInput(e.target.value);
   };
 
-  const handleSubmit = (e: data) => {
+  const handleSubmit = (e: Data) => {
     e.preventDefault();
-    fetch(`https://api.github.com/users/${input}`).then((response) =>
-      response.json().then((data) => {
+    fetch(`https://api.github.com/users/${input}`)
+      .then((response) => response.json())
+      .then((data) => {
         setUser(data);
-        setPicture(`${data.avatar_url}`);
         e.target.reset();
-      })
-    );
+      });
+    // fetch('url').then(res => res.json()).then(data => ....)
+    // fetch('url').then(res => res.json().then(data => ....))
   };
 
   return (
     <>
       <div className="mb-3 p-5">
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            onChange={getUser}
-            placeholder="Insert User"
-          ></input>
+          <input type="text" onChange={getUser} placeholder="Insert User" />
           <button type="submit">Search</button>
         </form>
         <br />
         {user.login && (
-          <div>
-            <div>Name: {user.name}</div>
-            <div>Location: {user.location}</div>
-            <div>Company: {user.company}</div>
-            <div>Web Page: {user.blog}</div>
-            <picture>
-              <img src={picture} alt="" />
-            </picture>
-          </div>
+          <>
+            <div>
+              <div>Name: {user.name}</div>
+              <div>Location: {user.location}</div>
+              {user.company ? <div>Company: {user.company}</div> : null}
+              {user.blog && <div>Web Page: {user.blog}</div>}
+              <picture>
+                <img src={user.avatar_url} alt="" />
+              </picture>
+            </div>
+            <div style={{ width: 600, height: 300 }}>
+              <Line options={options} data={info} />
+            </div>
+          </>
         )}
-      </div>
-      <div style={{ width: 600, height: 300 }}>
-        <Line options={options} data={info} />
       </div>
     </>
   );
