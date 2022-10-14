@@ -63,9 +63,7 @@ const Dashboard = () => {
           <button type="submit">Search</button>
         </form>
         <br />
-        {user.login && (
-          <User user={user} labels={labels} options={options} info={info} />
-        )}
+        {user.login && <User user={user} options={options} info={info} />}
       </div>
     </>
   );
