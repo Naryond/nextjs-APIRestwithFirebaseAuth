@@ -43,16 +43,14 @@ const Dashboard = () => {
     setInput(e.target.value);
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    fetch(`https://api.github.com/users/${input}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setUser(data);
-        e.target.reset();
-      });
-    // fetch('url').then(res => res.json()).then(data => ....)
-    // fetch('url').then(res => res.json().then(data => ....))
+    let fetched = await fetch(`https://api.github.com/users/${input}`);
+    if (fetched.ok) {
+      let response = await fetched.json();
+      setUser(response);
+      e.target.reset();
+    }
   };
 
   return (
