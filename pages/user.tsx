@@ -10,7 +10,7 @@ const User = ({ user, options, info }: any) => {
         {user.company ? <div>Company: {user.company}</div> : null}
         {user.blog ? <div>Web Page: {user.blog}</div> : null}
         <picture>
-          <img src={user.avatar_url} alt="" />
+          <img style={{ borderRadius: '20%' }} src={user.avatar_url} alt="" />
         </picture>
       </div>
       <Contributions options={options} data={info} />
