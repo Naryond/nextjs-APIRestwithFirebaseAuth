@@ -4,7 +4,6 @@ import User from './user';
 interface Data {
   preventDefault: any;
   target: any;
-  user: any;
 }
 
 const labels = ['2017', '2018', '2019', '2020', '2021', '2022'];
@@ -39,7 +38,7 @@ const Dashboard = () => {
   const [input, setInput] = useState('');
   const [user, setUser] = useState<any>({});
 
-  const handleInput = (e: any) => {
+  const handleInput = (e: Data) => {
     setInput(e.target.value);
   };
 
