@@ -44,20 +44,14 @@ const Dashboard = () => {
   };
 
   return (
-    <>
-      <div className="mb-3 p-5">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            type="text"
-            placeholder="Search User"
-            {...register('search')}
-          />
-          <button type="submit">Search</button>
-        </form>
-        <br />
-        {user.login && <User user={user} options={options} info={info} />}
-      </div>
-    </>
+    <div className="mb-3 p-5">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input type="text" placeholder="Search User" {...register('search')} />
+        <button type="submit">Search</button>
+      </form>
+      <br />
+      {user.login && <User user={user} options={options} info={info} />}
+    </div>
   );
 };
 
