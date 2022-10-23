@@ -13,7 +13,7 @@ const User = ({ user, options, info }: any) => {
           <img style={{ borderRadius: '20%' }} src={user.avatar_url} alt="" />
         </picture>
       </div>
-      <Contributions options={options} data={info} />
+      {/* <Contributions options={options} data={info} /> */}
     </>
   );
 };
