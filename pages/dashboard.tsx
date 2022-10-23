@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import User from './user';
 import { useForm } from 'react-hook-form';
-import { options, info } from './chartData';
+import { options, info } from '../chartData';
 
 const Dashboard = () => {
   const [user, setUser] = useState<any>({});
