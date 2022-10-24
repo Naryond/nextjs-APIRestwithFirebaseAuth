@@ -10,6 +10,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import { info } from '../components/chartData';
 
 ChartJS.register(
   CategoryScale,
@@ -21,10 +22,10 @@ ChartJS.register(
   Legend
 );
 
-const Contributions = ({ options, data }: any) => {
+const Contributions = () => {
   return (
     <div style={{ width: 600, height: 300 }}>
-      <Line options={options} data={data} />
+      <Line options={{}} data={info} />
     </div>
   );
 };

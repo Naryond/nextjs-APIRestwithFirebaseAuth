@@ -1,7 +1,5 @@
 const labels = ['2017', '2018', '2019', '2020', '2021', '2022'];
 
-export const options = {};
-
 export const info = {
   labels,
   datasets: [

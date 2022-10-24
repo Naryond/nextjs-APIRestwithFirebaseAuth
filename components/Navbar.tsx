@@ -4,6 +4,12 @@ import Link from 'next/link';
 import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/router';
 
+type Authorization = {
+  email: string;
+  uid: string;
+  displayName?: null;
+};
+
 const NavBar = () => {
   const { user, logout } = useAuth();
   const router = useRouter();

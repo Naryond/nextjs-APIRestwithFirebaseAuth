@@ -1,13 +1,35 @@
 import React, { useState } from 'react';
-import User from './user';
-import { useForm } from 'react-hook-form';
-import { options, info } from '../chartData';
+import Profile from '../components/profile';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { info } from '../components/chartData';
+
+export type Fetched = {
+  login: string;
+  name: string;
+  location: string;
+  company: string;
+  blog: string;
+  avatar_url: string;
+};
+
+type Form = {
+  search: string;
+};
+
+type Dataset = {
+  label: string;
+  data: number[];
+  backgroundColor: string;
+  borderColor: string;
+};
+
+export type info = { labels: string; datasets: Dataset };
 
 const Dashboard = () => {
-  const [user, setUser] = useState<any>({});
-  const { register, handleSubmit, reset } = useForm<any>();
+  const [user, setUser] = useState<Fetched>();
+  const { register, handleSubmit, reset } = useForm<Form>();
 
-  const onSubmit = async ({ search }: any) => {
+  const onSubmit: SubmitHandler<Form> = async ({ search }) => {
     let fetched = await fetch(`https://api.github.com/users/${search}`);
     if (fetched.ok) {
       let response = await fetched.json();
@@ -23,7 +45,7 @@ const Dashboard = () => {
         <button type="submit">Search</button>
       </form>
       <br />
-      {user.login && <User user={user} options={options} info={info} />}
+      {user?.login && <Profile user={user} />}
     </div>
   );
 };
