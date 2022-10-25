@@ -7,6 +7,13 @@ import {
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
 
+// trying to define user
+type User = {
+  uid: string;
+  email: string;
+  displayName?: string | void;
+};
+
 const AuthContext = createContext<any>({});
 
 export const useAuth = () => useContext(AuthContext);
@@ -17,6 +24,7 @@ export const AuthContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [user, setUser] = useState<any>(null);
+  console.log(user);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
