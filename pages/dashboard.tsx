@@ -45,7 +45,7 @@ const Dashboard = () => {
         <button type="submit">Search</button>
       </form>
       <br />
-      {user?.login && <Profile user={user} />}
+      {user?.login && <Profile {...user} />}
     </div>
   );
 };
