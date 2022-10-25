@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 
 const Login = () => {
   const { user, login } = useAuth();
@@ -9,7 +9,7 @@ const Login = () => {
     email: '',
     password: '',
   });
-  const router = useRouter();
+  const router: NextRouter = useRouter();
 
   const handleLogin = async (e: any) => {
     e.preventDefault();

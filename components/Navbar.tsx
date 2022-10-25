@@ -2,17 +2,11 @@ import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import Link from 'next/link';
 import { useAuth } from '../context/AuthContext';
-import { useRouter } from 'next/router';
-
-type Authorization = {
-  email: string;
-  uid: string;
-  displayName?: null;
-};
+import { NextRouter, useRouter } from 'next/router';
 
 const NavBar = () => {
   const { user, logout } = useAuth();
-  const router = useRouter();
+  const router: NextRouter = useRouter();
 
   return (
     <Navbar bg="light" expand="lg">
