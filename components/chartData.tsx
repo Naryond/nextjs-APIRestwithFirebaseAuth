@@ -1,6 +1,16 @@
-const labels = ['2017', '2018', '2019', '2020', '2021', '2022'];
+type Info = {
+  labels: string[];
+  datasets: {
+    label: string;
+    data: number[];
+    backgroundColor: string;
+    borderColor: string;
+  }[];
+};
 
-export const info = {
+const labels: string[] = ['2017', '2018', '2019', '2020', '2021', '2022'];
+
+export const info: Info = {
   labels,
   datasets: [
     {
