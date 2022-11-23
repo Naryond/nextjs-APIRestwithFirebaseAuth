@@ -56,9 +56,7 @@ const Dashboard = () => {
                 placeholder="Search User"
                 {...register('search')}
               />
-              <Button className="p-1" type="submit">
-                Search
-              </Button>
+              <button type="submit">Search</button>
             </form>
             <br />
             {user?.login && <Profile {...user} />}

@@ -19,16 +19,20 @@ const Settings = () => {
 
   const handleSettings = async (e: any) => {
     e.preventDefault();
-    try {
-      await updateEmailFunc(user, data.email);
-    } catch (err) {
-      console.log(err);
-    }
-    try {
-      await updatePasswordFunc(user, data.password);
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   await updateEmailFunc(data.email);
+    // } catch (err) {
+    //   console.log(err);
+    // }
+    // try {
+    //   await updatePasswordFunc(data.password);
+    // } catch (err) {
+    //   console.log(err);
+    // }
+    const promises = [];
+    promises.push(updateEmailFunc(data.email));
+    promises.push(updatePasswordFunc(data.password));
+    return Promise.all(promises).then().catch();
   };
 
   return (

@@ -9,13 +9,7 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
-
-// trying to define user
-type User = {
-  uid: string;
-  email: string;
-  displayName?: string | void;
-};
+import { userAgent } from 'next/server';
 
 const AuthContext = createContext<any>({});
 
@@ -28,6 +22,32 @@ export const AuthContextProvider = ({
 }) => {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+
+  const login = (email: string, password: string) => {
+    console.log(auth);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const signup = (email: string, password: string) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const logout = async () => {
+    setUser(null);
+    await signOut(auth);
+  };
+
+  const updateEmailFunc = (email: string) => {
+    return updateEmail(user, email);
+  };
+
+  const updatePasswordFunc = (password: string) => {
+    return updatePassword(user, password);
+  };
+
+  const resetPassword = (email: string) => {
+    return sendPasswordResetEmail(auth, email);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -45,31 +65,6 @@ export const AuthContextProvider = ({
 
     return () => unsubscribe();
   }, []);
-
-  const signup = (email: string, password: string) => {
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
-
-  const login = (email: string, password: string) => {
-    return signInWithEmailAndPassword(auth, email, password);
-  };
-
-  const updateEmailFunc = (email: string) => {
-    return updateEmail(user, email);
-  };
-
-  const updatePasswordFunc = (password: string) => {
-    return updatePassword(user, password);
-  };
-
-  const resetPassword = (email: string) => {
-    return sendPasswordResetEmail(auth, email);
-  };
-
-  const logout = async () => {
-    setUser(null);
-    await signOut(auth);
-  };
 
   return (
     <AuthContext.Provider
