@@ -4,6 +4,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updateEmail,
+  updatePassword,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
 
@@ -51,13 +54,35 @@ export const AuthContextProvider = ({
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  const updateEmailFunc = (email: string) => {
+    return updateEmail(user, email);
+  };
+
+  const updatePasswordFunc = (password: string) => {
+    return updatePassword(user, password);
+  };
+
+  const resetPassword = (email: string) => {
+    return sendPasswordResetEmail(auth, email);
+  };
+
   const logout = async () => {
     setUser(null);
     await signOut(auth);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        signup,
+        logout,
+        updateEmailFunc,
+        updatePasswordFunc,
+        resetPassword,
+      }}
+    >
       {loading ? null : children}
     </AuthContext.Provider>
   );

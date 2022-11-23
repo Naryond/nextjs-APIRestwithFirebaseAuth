@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Profile from '../components/profile';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { info } from '../components/chartData';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import Settings from '../components/settings';
 
 export type Fetched = {
   login: string;
@@ -27,6 +29,7 @@ export type info = { labels: string; datasets: Dataset };
 
 const Dashboard = () => {
   const [user, setUser] = useState<Fetched>();
+  const [edit, setEdit] = useState<boolean>(false);
   const { register, handleSubmit, reset } = useForm<Form>();
 
   const onSubmit: SubmitHandler<Form> = async ({ search }) => {
@@ -38,15 +41,37 @@ const Dashboard = () => {
     }
   };
 
+  const editMode = () => {
+    setEdit(!edit);
+  };
+
   return (
-    <div className="mb-3 p-5">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" placeholder="Search User" {...register('search')} />
-        <button type="submit">Search</button>
-      </form>
-      <br />
-      {user?.login && <Profile {...user} />}
-    </div>
+    <Container>
+      <Row>
+        <Col>
+          <div className="mb-3 p-5">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input
+                type="text"
+                placeholder="Search User"
+                {...register('search')}
+              />
+              <Button className="p-1" type="submit">
+                Search
+              </Button>
+            </form>
+            <br />
+            {user?.login && <Profile {...user} />}
+          </div>
+        </Col>
+        <Col>
+          <div className="mb-3 p-5">
+            <Button onClick={editMode}>Settings</Button>
+            {edit ? <Settings /> : null}
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
