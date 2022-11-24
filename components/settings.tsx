@@ -1,31 +1,25 @@
-import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import React from 'react';
+import { Container, Button } from 'react-bootstrap';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { getAuth, updateEmail, updatePassword } from 'firebase/auth';
 
 const Settings = () => {
-  const [data, setData] = useState({
-    email: '',
-    password: '',
-    loading: false,
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
 
   const auth = getAuth();
 
   const currentUser: any = auth.currentUser;
 
-  const handleEmail = (e: any) => {
-    setData({ ...data, email: e.target.value });
-  };
-
-  const handlePassword = (e: any) => {
-    setData({ ...data, password: e.target.value });
-  };
-
-  const handleSettings = async (e: any) => {
-    e.preventDefault();
+  const onSubmit = async ({ email, password }: any) => {
     try {
-      await updateEmail(currentUser, data.email);
-      await updatePassword(currentUser, data.password);
+      await updateEmail(currentUser, email);
+      await updatePassword(currentUser, password);
+      reset();
     } catch (err) {
       console.log(err);
     } finally {
@@ -36,31 +30,25 @@ const Settings = () => {
   return (
     <Container className="mt-3">
       <h5>Update Profile</h5>
-      <Form onSubmit={handleSettings}>
-        <Form.Group className="mb-3" controlId="formEmail">
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            onChange={handleEmail}
-            value={data.email}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="m-3">
+          <label>Email Address</label>
+          <input
+            {...register('email')}
             type="email"
             placeholder="Enter new Email"
-            required
           />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            onChange={handlePassword}
-            value={data.password}
+        </div>
+        <div className="m-3">
+          <label>Password</label>
+          <input
+            {...register('password')}
             type="password"
             placeholder="Enter new Password"
-            required
           />
-        </Form.Group>
-        <Button disabled={data.loading} type="submit">
-          Update
-        </Button>
-      </Form>
+        </div>
+        <Button type="submit">Update</Button>
+      </form>
     </Container>
   );
 };
