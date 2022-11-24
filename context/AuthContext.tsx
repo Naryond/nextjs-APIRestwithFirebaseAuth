@@ -4,8 +4,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  updateEmail,
-  updatePassword,
   sendPasswordResetEmail,
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
@@ -33,24 +31,6 @@ export const AuthContextProvider = ({
   const logout = async () => {
     setUser(null);
     await signOut(auth);
-  };
-
-  const updateEmailFunc = async (email: string) => {
-    const updated = updateEmail(user, email)
-      .then(() => {
-        'well done';
-      })
-      .catch((err) => console.log(err));
-    return updated;
-  };
-
-  const updatePasswordFunc = async (password: string) => {
-    const updated = updatePassword(user, password)
-      .then(() => {
-        'well done';
-      })
-      .catch((err) => console.log(err));
-    return updated;
   };
 
   const resetPassword = (email: string) => {
@@ -81,8 +61,6 @@ export const AuthContextProvider = ({
         login,
         signup,
         logout,
-        updateEmailFunc,
-        updatePasswordFunc,
         resetPassword,
       }}
     >

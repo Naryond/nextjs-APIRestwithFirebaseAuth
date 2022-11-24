@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
 import { Container, Form, Button } from 'react-bootstrap';
+import { getAuth, updateEmail, updatePassword } from 'firebase/auth';
 
 const Settings = () => {
-  const { user, updateEmailFunc, updatePasswordFunc } = useAuth();
   const [data, setData] = useState({
     email: '',
     password: '',
     loading: false,
   });
+
+  const auth = getAuth();
+
+  const utente: any = auth.currentUser;
 
   const handleEmail = (e: any) => {
     setData({ ...data, email: e.target.value });
@@ -20,25 +23,14 @@ const Settings = () => {
 
   const handleSettings = async (e: any) => {
     e.preventDefault();
-    // try {
-    //   await updateEmailFunc(data.email);
-    // } catch (err) {
-    //   console.log(err);
-    // }
-    // try {
-    //   await updatePasswordFunc(data.password);
-    // } catch (err) {
-    //   console.log(err);
-    // }
-    const promises = [];
-    setData({ ...data, loading: true });
-    const newEmail = data.email;
-    const newPassword = data.password;
-    promises.push(updateEmailFunc(user, newEmail));
-    promises.push(updatePasswordFunc(user, newPassword));
-    return Promise.all(promises)
-      .then(() => setData({ ...data, loading: false }))
-      .catch();
+    try {
+      await updateEmail(utente, data.email);
+      await updatePassword(utente, data.password);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      alert('Credentials updated');
+    }
   };
 
   return (
