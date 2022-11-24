@@ -11,7 +11,7 @@ const Settings = () => {
 
   const auth = getAuth();
 
-  const utente: any = auth.currentUser;
+  const currentUser: any = auth.currentUser;
 
   const handleEmail = (e: any) => {
     setData({ ...data, email: e.target.value });
@@ -24,8 +24,8 @@ const Settings = () => {
   const handleSettings = async (e: any) => {
     e.preventDefault();
     try {
-      await updateEmail(utente, data.email);
-      await updatePassword(utente, data.password);
+      await updateEmail(currentUser, data.email);
+      await updatePassword(currentUser, data.password);
     } catch (err) {
       console.log(err);
     } finally {
