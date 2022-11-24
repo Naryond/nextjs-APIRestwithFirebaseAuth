@@ -7,6 +7,7 @@ const Settings = () => {
   const [data, setData] = useState({
     email: '',
     password: '',
+    loading: false,
   });
 
   const handleEmail = (e: any) => {
@@ -30,9 +31,14 @@ const Settings = () => {
     //   console.log(err);
     // }
     const promises = [];
-    promises.push(updateEmailFunc(data.email));
-    promises.push(updatePasswordFunc(data.password));
-    return Promise.all(promises).then().catch();
+    setData({ ...data, loading: true });
+    const newEmail = data.email;
+    const newPassword = data.password;
+    promises.push(updateEmailFunc(user, newEmail));
+    promises.push(updatePasswordFunc(user, newPassword));
+    return Promise.all(promises)
+      .then(() => setData({ ...data, loading: false }))
+      .catch();
   };
 
   return (
@@ -59,7 +65,9 @@ const Settings = () => {
             required
           />
         </Form.Group>
-        <Button type="submit">Update</Button>
+        <Button disabled={data.loading} type="submit">
+          Update
+        </Button>
       </Form>
     </Container>
   );

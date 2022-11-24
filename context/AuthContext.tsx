@@ -9,7 +9,6 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
-import { userAgent } from 'next/server';
 
 const AuthContext = createContext<any>({});
 
@@ -24,7 +23,6 @@ export const AuthContextProvider = ({
   const [loading, setLoading] = useState(true);
 
   const login = (email: string, password: string) => {
-    console.log(auth);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -37,12 +35,22 @@ export const AuthContextProvider = ({
     await signOut(auth);
   };
 
-  const updateEmailFunc = (email: string) => {
-    return updateEmail(user, email);
+  const updateEmailFunc = async (email: string) => {
+    const updated = updateEmail(user, email)
+      .then(() => {
+        'well done';
+      })
+      .catch((err) => console.log(err));
+    return updated;
   };
 
-  const updatePasswordFunc = (password: string) => {
-    return updatePassword(user, password);
+  const updatePasswordFunc = async (password: string) => {
+    const updated = updatePassword(user, password)
+      .then(() => {
+        'well done';
+      })
+      .catch((err) => console.log(err));
+    return updated;
   };
 
   const resetPassword = (email: string) => {
