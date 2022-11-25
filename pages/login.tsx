@@ -21,6 +21,15 @@ const Login = () => {
     }
   };
 
+  const guestAccess = async () => {
+    try {
+      await login('guest@access.com', 'guestaccess');
+      router.push('/dashboard');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div style={{ width: '40%', margin: 'auto' }}>
       <h1 className="text-center my-3">Login</h1>
@@ -49,6 +58,9 @@ const Login = () => {
         </Form.Group>
         <Button variant="primary" type="submit">
           Login
+        </Button>
+        <Button className="m-3" variant="primary" onClick={guestAccess}>
+          Access as Guest
         </Button>
       </Form>
     </div>
