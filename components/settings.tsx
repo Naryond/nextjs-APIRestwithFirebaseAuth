@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Button } from 'react-bootstrap';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { getAuth, updateEmail, updatePassword } from 'firebase/auth';
 
-const Settings = () => {
+const Settings = (closePage: any) => {
   const {
     register,
     handleSubmit,

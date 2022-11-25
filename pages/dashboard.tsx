@@ -41,7 +41,7 @@ const Dashboard = () => {
     }
   };
 
-  const editMode = () => {
+  const editMode = (): void => {
     setEdit(!edit);
   };
 
@@ -65,7 +65,7 @@ const Dashboard = () => {
         <Col>
           <div className="mb-3 p-5">
             <Button onClick={editMode}>Settings</Button>
-            {edit ? <Settings /> : null}
+            {edit ? <Settings closePage={editMode} /> : null}
           </div>
         </Col>
       </Row>
