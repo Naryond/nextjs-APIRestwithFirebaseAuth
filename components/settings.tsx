@@ -3,7 +3,7 @@ import { Container, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { getAuth, updateEmail, updatePassword } from 'firebase/auth';
 
-const Settings = (closePage: any) => {
+const Settings = ({ closePage }: any) => {
   const {
     register,
     handleSubmit,
@@ -24,6 +24,7 @@ const Settings = (closePage: any) => {
       console.log(err);
     } finally {
       alert('Credentials updated');
+      closePage();
     }
   };
 
