@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { info } from '../components/chartData';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import Settings from '../components/settings';
-import { getAuth } from 'firebase/auth';
+import { useAuth } from '../context/AuthContext';
 
 export type Fetched = {
   login: string;
@@ -28,12 +28,11 @@ type Dataset = {
 
 export type info = { labels: string; datasets: Dataset };
 
-const userGuest = 'guest@access.com';
-const userEmail: any = getAuth().currentUser?.email;
-console.log(userEmail);
+const userGuestId: string = '50zJsjxQPKbQHGGLV5KmxVADPU42';
 
 const Dashboard = () => {
-  const [user, setUser] = useState<Fetched>();
+  const { user } = useAuth();
+  const [userCurrentUser, setUserCurrentUser] = useState<Fetched>();
   const [edit, setEdit] = useState<boolean>(false);
   const { register, handleSubmit, reset } = useForm<Form>();
 
@@ -41,7 +40,7 @@ const Dashboard = () => {
     let fetched = await fetch(`https://api.github.com/users/${search}`);
     if (fetched.ok) {
       let response = await fetched.json();
-      setUser(response);
+      setUserCurrentUser(response);
       reset();
     }
   };
@@ -64,17 +63,17 @@ const Dashboard = () => {
               <button type="submit">Search</button>
             </form>
             <br />
-            {user?.login && <Profile {...user} />}
+            {userCurrentUser?.login && <Profile {...userCurrentUser} />}
           </div>
         </Col>
-        {userEmail !== userGuest ? (
-          <Col>
+        <Col>
+          {user.uid !== userGuestId ? (
             <div className="mb-3 p-5">
               <Button onClick={editMode}>Settings</Button>
               {edit ? <Settings closePage={editMode} /> : null}
             </div>
-          </Col>
-        ) : null}
+          ) : null}
+        </Col>
       </Row>
     </Container>
   );
