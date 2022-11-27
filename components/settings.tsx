@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { getAuth, updateEmail, updatePassword } from 'firebase/auth';
+import { useAuth } from '../context/AuthContext';
 
 const Settings = ({ closePage }: any) => {
   const {
@@ -11,14 +12,12 @@ const Settings = ({ closePage }: any) => {
     reset,
   } = useForm();
 
-  const auth = getAuth();
-
-  const currentUser: any = auth.currentUser;
+  const { user } = useAuth();
 
   const onSubmit = async ({ email, password }: any) => {
     try {
-      await updateEmail(currentUser, email);
-      await updatePassword(currentUser, password);
+      await updateEmail(user, email);
+      await updatePassword(user, password);
       reset();
     } catch (err) {
       console.log(err);

@@ -22,6 +22,9 @@ const NavBar = () => {
                 <Link href="/dashboard" passHref>
                   <Nav.Link>Dashboard</Nav.Link>
                 </Link>
+                <Link href="/settings" passHref>
+                  <Nav.Link>Settings</Nav.Link>
+                </Link>
                 <Nav.Link
                   onClick={() => {
                     logout();

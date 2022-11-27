@@ -8,15 +8,23 @@ import {
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
 
+// TODO: get rid of any
 const AuthContext = createContext<any>({});
 
 export const useAuth = () => useContext(AuthContext);
+
+// type User = {
+//   uid: string;
+//   email: string;
+//   displayName: string;
+// }
 
 export const AuthContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
+  // TODO: get rid of any
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 

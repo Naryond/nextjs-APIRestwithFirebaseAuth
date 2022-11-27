@@ -3,6 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
 import { NextRouter, useRouter } from 'next/router';
 
+// TODO: rebuild to use react-hook-form
 const Login = () => {
   const { user, login } = useAuth();
   const [data, setData] = useState({

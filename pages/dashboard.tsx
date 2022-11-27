@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import Profile from '../components/profile';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { info } from '../components/chartData';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+
+import Profile from '../components/profile';
+import { info } from '../components/chartData';
 import Settings from '../components/settings';
 import { useAuth } from '../context/AuthContext';
 
+// TODO: rename
 export type Fetched = {
   login: string;
   name: string;
@@ -15,10 +17,12 @@ export type Fetched = {
   avatar_url: string;
 };
 
+// TODO: rename
 type Form = {
   search: string;
 };
 
+// TODO: rename
 type Dataset = {
   label: string;
   data: number[];
@@ -26,12 +30,14 @@ type Dataset = {
   borderColor: string;
 };
 
+// TODO: rename
 export type info = { labels: string; datasets: Dataset };
 
 const userGuestId: string = '50zJsjxQPKbQHGGLV5KmxVADPU42';
 
 const Dashboard = () => {
   const { user } = useAuth();
+  // TODO: rename
   const [userCurrentUser, setUserCurrentUser] = useState<Fetched>();
   const [edit, setEdit] = useState<boolean>(false);
   const { register, handleSubmit, reset } = useForm<Form>();
