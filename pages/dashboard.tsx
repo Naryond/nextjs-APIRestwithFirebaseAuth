@@ -7,8 +7,7 @@ import { info } from '../components/chartData';
 import Settings from '../components/settings';
 import { useAuth } from '../context/AuthContext';
 
-// TODO: rename
-export type Fetched = {
+export type GithubAccount = {
   login: string;
   name: string;
   location: string;
@@ -38,7 +37,7 @@ const userGuestId: string = '50zJsjxQPKbQHGGLV5KmxVADPU42';
 const Dashboard = () => {
   const { user } = useAuth();
   // TODO: rename
-  const [userCurrentUser, setUserCurrentUser] = useState<Fetched>();
+  const [userCurrentUser, setUserCurrentUser] = useState<GithubAccount>();
   const [edit, setEdit] = useState<boolean>(false);
   const { register, handleSubmit, reset } = useForm<Form>();
 

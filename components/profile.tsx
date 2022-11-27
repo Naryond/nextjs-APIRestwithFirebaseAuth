@@ -1,9 +1,15 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Contributions from './contributions';
-import { Fetched } from '../pages/dashboard';
+import { GithubAccount } from '../pages/dashboard';
 
-const Profile = ({ name, location, company, blog, avatar_url }: Fetched) => {
+const Profile = ({
+  name,
+  location,
+  company,
+  blog,
+  avatar_url,
+}: GithubAccount) => {
   return (
     <>
       <Card>
