@@ -16,8 +16,7 @@ export type GithubAccount = {
   avatar_url: string;
 };
 
-// TODO: rename
-type Form = {
+type UserSearchForm = {
   search: string;
 };
 
@@ -39,9 +38,9 @@ const Dashboard = () => {
   // TODO: rename
   const [userCurrentUser, setUserCurrentUser] = useState<GithubAccount>();
   const [edit, setEdit] = useState<boolean>(false);
-  const { register, handleSubmit, reset } = useForm<Form>();
+  const { register, handleSubmit, reset } = useForm<UserSearchForm>();
 
-  const onSubmit: SubmitHandler<Form> = async ({ search }) => {
+  const onSubmit: SubmitHandler<UserSearchForm> = async ({ search }) => {
     let fetched = await fetch(`https://api.github.com/users/${search}`);
     if (fetched.ok) {
       let response = await fetched.json();
