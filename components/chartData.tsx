@@ -1,4 +1,4 @@
-type Info = {
+type GraphType = {
   labels: string[];
   datasets: {
     label: string;
@@ -10,7 +10,7 @@ type Info = {
 
 const labels: string[] = ['2017', '2018', '2019', '2020', '2021', '2022'];
 
-export const info: Info = {
+export const graph: GraphType = {
   labels,
   datasets: [
     {

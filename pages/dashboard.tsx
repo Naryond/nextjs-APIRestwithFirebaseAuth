@@ -3,7 +3,6 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 
 import Profile from '../components/profile';
-import { info } from '../components/chartData';
 import Settings from '../components/settings';
 import { useAuth } from '../context/AuthContext';
 
@@ -19,17 +18,6 @@ export type GithubAccount = {
 type UserSearchForm = {
   search: string;
 };
-
-// TODO: rename
-type Dataset = {
-  label: string;
-  data: number[];
-  backgroundColor: string;
-  borderColor: string;
-};
-
-// TODO: rename
-export type info = { labels: string; datasets: Dataset };
 
 const userGuestId: string = '50zJsjxQPKbQHGGLV5KmxVADPU42';
 
