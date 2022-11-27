@@ -1,57 +1,58 @@
-import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import React from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { Button, Container } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
 import { NextRouter, useRouter } from 'next/router';
 
+type UserSignupForm = {
+  email: string;
+  password: string;
+};
+
 const Signup = () => {
-  const { user, signup } = useAuth();
-  const [data, setData] = useState({
-    email: '',
-    password: '',
-  });
+  const { signup } = useAuth();
+  const { register, handleSubmit, reset } = useForm<UserSignupForm>();
   const router: NextRouter = useRouter();
 
-  const handleSignup = async (e: any) => {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<UserSignupForm> = async ({
+    email,
+    password,
+  }) => {
     try {
-      await signup(data.email, data.password);
+      await signup(email, password);
       router.push('/dashboard');
+      reset();
     } catch (err) {
       console.log(err);
     }
-    console.log(data);
   };
 
   return (
     <div style={{ width: '40%', margin: 'auto' }}>
       <h1 className="text-center my-3">Signup</h1>
-      <Form onSubmit={handleSignup}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            onChange={(e: any) => setData({ ...data, email: e.target.value })}
-            value={data.email}
-            required
-            type="email"
-            placeholder="Enter email"
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            onChange={(e: any) =>
-              setData({ ...data, password: e.target.value })
-            }
-            value={data.password}
-            required
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Signup
-        </Button>
-      </Form>
+      <Container className="mb-3 p-5">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="my-3">
+            <input
+              type="email"
+              required
+              placeholder="Enter Email"
+              {...register('email')}
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              required
+              placeholder="Enter Password"
+              {...register('password')}
+            />
+          </div>
+          <Button className="m-3" variant="primary" type="submit">
+            Signup
+          </Button>
+        </form>
+      </Container>
     </div>
   );
 };
