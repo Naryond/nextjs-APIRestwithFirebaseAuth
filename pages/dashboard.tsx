@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 import Profile from '../components/profile';
 import Settings from '../components/settings';
@@ -23,8 +23,7 @@ const userGuestId: string = '50zJsjxQPKbQHGGLV5KmxVADPU42';
 
 const Dashboard = () => {
   const { user } = useAuth();
-  // TODO: rename
-  const [userCurrentUser, setUserCurrentUser] = useState<GithubAccount>();
+  const [githubUser, setGithubUser] = useState<GithubAccount>();
   const [edit, setEdit] = useState<boolean>(false);
   const { register, handleSubmit, reset } = useForm<UserSearchForm>();
 
@@ -32,7 +31,7 @@ const Dashboard = () => {
     let fetched = await fetch(`https://api.github.com/users/${search}`);
     if (fetched.ok) {
       let response = await fetched.json();
-      setUserCurrentUser(response);
+      setGithubUser(response);
       reset();
     }
   };
@@ -55,7 +54,7 @@ const Dashboard = () => {
               <button type="submit">Search</button>
             </form>
             <br />
-            {userCurrentUser?.login && <Profile {...userCurrentUser} />}
+            {githubUser?.login && <Profile {...githubUser} />}
           </div>
         </Col>
         <Col>
