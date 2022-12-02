@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import Profile from '../components/profile';
-import Settings from '../components/userSettings';
-import { useAuth } from '../context/AuthContext';
 
 export type GithubAccount = {
   login: string;
@@ -19,12 +17,8 @@ type UserSearchForm = {
   search: string;
 };
 
-const userGuestId: string = '50zJsjxQPKbQHGGLV5KmxVADPU42';
-
 const Dashboard = () => {
-  const { user } = useAuth();
   const [githubUser, setGithubUser] = useState<GithubAccount>();
-  const [edit, setEdit] = useState<boolean>(false);
   const { register, handleSubmit, reset } = useForm<UserSearchForm>();
 
   const onSubmit: SubmitHandler<UserSearchForm> = async ({ search }) => {
@@ -34,10 +28,6 @@ const Dashboard = () => {
       setGithubUser(response);
       reset();
     }
-  };
-
-  const editMode = (): void => {
-    setEdit(!edit);
   };
 
   return (
@@ -56,14 +46,6 @@ const Dashboard = () => {
             <br />
             {githubUser?.login && <Profile {...githubUser} />}
           </div>
-        </Col>
-        <Col>
-          {user.uid !== userGuestId ? (
-            <div className="mb-3 p-5">
-              <Button onClick={editMode}>Settings</Button>
-              {edit ? <Settings closePage={editMode} /> : null}
-            </div>
-          ) : null}
         </Col>
       </Row>
     </Container>
