@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { getAuth, updateEmail, updatePassword } from 'firebase/auth';
 import { useAuth } from '../context/AuthContext';
 
-const Settings = ({ closePage }: any) => {
+const UserSettings = () => {
   const {
     register,
     handleSubmit,
@@ -23,7 +23,6 @@ const Settings = ({ closePage }: any) => {
       console.log(err);
     } finally {
       alert('Credentials updated');
-      closePage();
     }
   };
 
@@ -53,4 +52,4 @@ const Settings = ({ closePage }: any) => {
   );
 };
 
-export default Settings;
+export default UserSettings;

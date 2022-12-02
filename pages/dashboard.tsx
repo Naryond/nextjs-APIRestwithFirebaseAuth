@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
 import Profile from '../components/profile';
-import Settings from '../components/settings';
+import Settings from '../components/userSettings';
 import { useAuth } from '../context/AuthContext';
 
 export type GithubAccount = {
