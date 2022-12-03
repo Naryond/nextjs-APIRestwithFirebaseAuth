@@ -1,8 +1,9 @@
 import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { getAuth, updateEmail, updatePassword } from 'firebase/auth';
-import { useAuth } from '../context/AuthContext';
+import { updateEmail, updatePassword } from 'firebase/auth';
+// import { useAuth } from '../context/AuthContext';
+import { auth } from '../config/firebase';
 
 const UserSettings = () => {
   const {
@@ -12,7 +13,8 @@ const UserSettings = () => {
     reset,
   } = useForm();
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  const user: any = auth.currentUser;
 
   const onSubmit = async ({ email, password }: any) => {
     try {
