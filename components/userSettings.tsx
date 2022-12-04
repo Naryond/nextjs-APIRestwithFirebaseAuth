@@ -6,12 +6,7 @@ import { updateEmail, updatePassword } from 'firebase/auth';
 import { auth } from '../config/firebase';
 
 const UserSettings = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   // const { user } = useAuth();
   const user: any = auth.currentUser;

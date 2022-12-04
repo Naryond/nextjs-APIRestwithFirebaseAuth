@@ -24,6 +24,7 @@ const Signup = () => {
       reset();
     } catch (err) {
       console.log(err);
+      alert(err);
     }
   };
 
