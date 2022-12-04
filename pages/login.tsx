@@ -40,7 +40,7 @@ const Login = () => {
   return (
     <div style={{ width: '40%', margin: 'auto' }}>
       <h1 className="text-center my-3">Login</h1>
-      <Container className="mb-3 p-5">
+      <Container className="m-3 p-5">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="my-3">
             <input
@@ -50,7 +50,7 @@ const Login = () => {
               {...register('email')}
             />
           </div>
-          <div>
+          <div className="my-3">
             <input
               type="password"
               required
@@ -61,7 +61,7 @@ const Login = () => {
           <Button variant="primary" type="submit">
             Login
           </Button>
-          <Button className="m-3" variant="primary" onClick={guestAccess}>
+          <Button variant="primary" onClick={guestAccess}>
             Access as Guest
           </Button>
         </form>

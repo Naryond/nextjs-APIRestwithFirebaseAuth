@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { updateEmail, updatePassword } from 'firebase/auth';
+import { updatePassword } from 'firebase/auth';
 // import { useAuth } from '../context/AuthContext';
 import { auth } from '../config/firebase';
 
@@ -10,16 +10,18 @@ const UserSettings = () => {
 
   // const { user } = useAuth();
   const user: any = auth.currentUser;
+  console.log(user);
 
-  const onSubmit = async ({ email, password }: any) => {
+  // Trying to verify the current password first
+
+  const onSubmit = async ({ password, confirmPassword }: any) => {
     try {
-      await updateEmail(user, email);
-      await updatePassword(user, password);
+      if (password === confirmPassword) await updatePassword(user, password);
       reset();
+      alert('credentials updated');
     } catch (err) {
       console.log(err);
-    } finally {
-      alert('Credentials updated');
+      alert(err);
     }
   };
 
@@ -27,20 +29,28 @@ const UserSettings = () => {
     <Container className="mt-3">
       <h5>Update Profile</h5>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="m-3">
-          <label>Email Address</label>
+        {/* <div className="m-3">
+          <label className="mx-2">Current Password</label>
           <input
-            {...register('email')}
-            type="email"
-            placeholder="Enter new Email"
+            {...register('oldPassword')}
+            type="password"
+            placeholder="Enter current password"
           />
-        </div>
+        </div> */}
         <div className="m-3">
-          <label>Password</label>
+          <label className="mx-2">New Password</label>
           <input
             {...register('password')}
             type="password"
             placeholder="Enter new Password"
+          />
+        </div>
+        <div className="m-3">
+          <label className="mx-2">Confirm New Password</label>
+          <input
+            {...register('confirmPassword')}
+            type="password"
+            placeholder="Confirm password"
           />
         </div>
         <Button type="submit">Update</Button>

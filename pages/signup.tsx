@@ -41,7 +41,7 @@ const Signup = () => {
               {...register('email')}
             />
           </div>
-          <div>
+          <div className="my-3">
             <input
               type="password"
               required
