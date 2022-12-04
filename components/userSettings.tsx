@@ -10,7 +10,6 @@ const UserSettings = () => {
 
   // const { user } = useAuth();
   const user: any = auth.currentUser;
-  console.log(user);
 
   // Trying to verify the current password first
 
