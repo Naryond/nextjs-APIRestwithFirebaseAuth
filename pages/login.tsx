@@ -58,11 +58,9 @@ const Login = () => {
               {...register('password')}
             />
           </div>
-
-          <Button variant="primary" type="submit">
+          <Button className="mx-2" variant="primary" type="submit">
             Login
           </Button>
-
           <Button variant="primary" onClick={guestAccess}>
             Access as Guest
           </Button>

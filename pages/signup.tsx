@@ -31,7 +31,7 @@ const Signup = () => {
   return (
     <div style={{ width: '40%', margin: 'auto' }}>
       <h1 className="text-center my-3">Signup</h1>
-      <Container className="mb-3 p-5">
+      <Container className="m-3 p-5">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="my-3">
             <input
@@ -49,7 +49,7 @@ const Signup = () => {
               {...register('password')}
             />
           </div>
-          <Button className="m-3" variant="primary" type="submit">
+          <Button className="mx-2" variant="primary" type="submit">
             Signup
           </Button>
         </form>
