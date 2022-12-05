@@ -8,16 +8,16 @@ import {
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
 
+type User = {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+} | null;
+
 // TODO: get rid of any
-const AuthContext = createContext<any>({});
+const AuthContext = createContext({});
 
-export const useAuth = () => useContext(AuthContext);
-
-// type User = {
-//   uid: string;
-//   email: string;
-//   displayName: string;
-// }
+export const useAuth = () => useContext<any>(AuthContext);
 
 export const AuthContextProvider = ({
   children,
@@ -25,8 +25,8 @@ export const AuthContextProvider = ({
   children: React.ReactNode;
 }) => {
   // TODO: get rid of any
-  const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const login = (email: string, password: string) => {
     return signInWithEmailAndPassword(auth, email, password);
